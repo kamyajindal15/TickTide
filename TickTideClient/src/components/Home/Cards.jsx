@@ -67,8 +67,10 @@ const Cards = ({ home, setInputDiv, apiRoute }) => {
     }
   };
 
-  // Delete task
   const handleDeleteTask = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this task?");
+    if (!confirmDelete) return; // Exit the function if the user cancels
+  
     try {
       await axios.delete(`http://localhost:1000/api/v2/delete-task/${id}`, {
         headers,
@@ -78,6 +80,7 @@ const Cards = ({ home, setInputDiv, apiRoute }) => {
       console.error("Error deleting task:", error.response?.data || error.message);
     }
   };
+  
 
   // Edit task
   const handleEditTask = async (e) => {
